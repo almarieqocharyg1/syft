@@ -1,0 +1,14 @@
+name: CI Test
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: true
+      - name: Run test
+        run: go test ./syft/pkg/cataloger/binary/... -v -count=1 -short
